@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scientific Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1e1e1e;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            width: 340px;
+            background: #2c2c2c;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #444;
+            color: white;
+        }
+
+        button:hover {
+            background: #666;
+        }
+
+        .equal {
+            background: #ff9500;
+            grid-column: span 2;
+        }
+
+        .clear {
+            background: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+
+    <div class="buttons">
+        <button onclick="clearDisplay()" class="clear">C</button>
+        <button onclick="deleteLast()">DEL</button>
+        <button onclick="append('(')">(</button>
+        <button onclick="append(')')">)</button>
+        <button onclick="append('/')">÷</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('*')">×</button>
+        <button onclick="sqrt()">√</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('-')">−</button>
+        <button onclick="power()">x²</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('+')">+</button>
+        <button onclick="append('**')">xʸ</button>
+
+        <button onclick="append('0')">0</button>
+        <button onclick="append('.')">.</button>
+        <button onclick="append('Math.PI')">π</button>
+        <button onclick="append('Math.E')">e</button>
+        <button onclick="calculate()" class="equal">=</button>
+
+        <button onclick="sin()">sin</button>
+        <button onclick="cos()">cos</button>
+        <button onclick="tan()">tan</button>
+        <button onclick="log()">log</button>
+        <button onclick="ln()">ln</button>
+    </div>
+</div>
+
+<script>
+    let display = document.getElementById("display");
+
+    function append(value) {
+        display.value += value;
+    }
+
+    function clearDisplay() {
+        display.value = "";
+    }
+
+    function deleteLast() {
+        display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            display.value = eval(display.value);
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+    function sqrt() {
+        display.value = Math.sqrt(display.value);
+    }
+
+    function power() {
+        display.value = Math.pow(display.value, 2);
+    }
+
+    function sin() {
+        display.value = Math.sin(toRadians(display.value));
+    }
+
+    function cos() {
+        display.value = Math.cos(toRadians(display.value));
+    }
+
+    function tan() {
+        display.value = Math.tan(toRadians(display.value));
+    }
+
+    function log() {
+        display.value = Math.log10(display.value);
+    }
+
+    function ln() {
+        display.value = Math.log(display.value);
+    }
+
+    function toRadians(deg) {
+        return deg * (Math.PI / 180);
+    }
+</script>
+
+</body>
+</html>
